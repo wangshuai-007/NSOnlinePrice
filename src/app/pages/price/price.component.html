@@ -1,0 +1,16 @@
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="employees"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
+  [showBorders]="true"
+>
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxi-column dataField="name" ></dxi-column>
+  <dxi-column dataField="range" ></dxi-column>
+  <dxi-column dataField="currency"></dxi-column>
+  <dxi-column dataField="price" [width]="230"></dxi-column>
+
+</dx-data-grid>
