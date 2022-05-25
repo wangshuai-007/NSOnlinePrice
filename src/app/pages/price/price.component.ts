@@ -17,8 +17,9 @@ export class PriceComponent {
   employees: priceInfo[];
 
   constructor(service: Service) {
-    this.employees = service.getNsOnlinePrice().flatMap(c=>c.listPrice);
-    console.log('emp is :',this.employees);
+    this.employees=new Array<priceInfo>();
+     service.getNsOnlinePrice().subscribe(data=>this.employees=data.flatMap(x=>x.listPrice));
+    // console.log('emp is :',this.employees);
 
   }
 }
