@@ -300,22 +300,22 @@ export class Service {
     })
     var result = regions.map(region => {
       var regionPrice: RegionPrice = { regionName: region.name, listPrice: [] };
-      // this.httpClient.get(region.url + "?" + params, httpOptions).subscribe((data: any) => {
-      //   console.log('data:', data);
-      //   regionPrice.listPrice = data.map((p: { id: number; price: { regular_price: { currency: any; formatted_value: any; }; }; }) => {
-      //     var currentInfo = uidInfos.find(f => f.uid == p.id);
-      //     if (currentInfo == null) currentInfo = { name: "", range: "", uid: 0 };
-      //     return { name: currentInfo.name, range: currentInfo.range, currency: p.price.regular_price.currency, price: p.price.regular_price.formatted_value };
-      //   });
-      // });
-      var data = dataTemp;
-      console.log('data:', data);
-      regionPrice.listPrice = data.map((p: { id: number; price: { regular_price: { currency: any; formatted_value: any; }; }; }) => {
-        var currentInfo = uidInfos.find(f => f.uid == p.id);
-        if (currentInfo == null) currentInfo = { name: "", range: "", uid: 0 };
-        return { name: currentInfo.name, range: currentInfo.range, currency: p.price.regular_price.currency, price: p.price.regular_price.formatted_value };
+      this.httpClient.get("https://my-worker.shuaiwang.workers.dev/", httpOptions).subscribe((data: any) => {
+        console.log('data:', data);
+        regionPrice.listPrice = data.map((p: { id: number; price: { regular_price: { currency: any; formatted_value: any; }; }; }) => {
+          var currentInfo = uidInfos.find(f => f.uid == p.id);
+          if (currentInfo == null) currentInfo = { name: "", range: "", uid: 0 };
+          return { name: currentInfo.name, range: currentInfo.range, currency: p.price.regular_price.currency, price: p.price.regular_price.formatted_value };
+        });
       });
-      ;
+      // var data = dataTemp;
+      // console.log('data:', data);
+      // regionPrice.listPrice = data.map((p: { id: number; price: { regular_price: { currency: any; formatted_value: any; }; }; }) => {
+      //   var currentInfo = uidInfos.find(f => f.uid == p.id);
+      //   if (currentInfo == null) currentInfo = { name: "", range: "", uid: 0 };
+      //   return { name: currentInfo.name, range: currentInfo.range, currency: p.price.regular_price.currency, price: p.price.regular_price.formatted_value };
+      // });
+
       return regionPrice;
     });
     return result;

@@ -19,6 +19,7 @@ export class PriceComponent {
   constructor(service: Service) {
     this.employees = service.getNsOnlinePrice().flatMap(c=>c.listPrice);
     console.log('emp is :',this.employees);
+
   }
 }
 
