@@ -18,7 +18,10 @@ export class PriceComponent {
 
   constructor(service: Service) {
     this.employees=new Array<priceInfo>();
-     service.getNsOnlinePrice().subscribe(data=>this.employees=data.flatMap(x=>x.listPrice));
+     service.getNsOnlinePrice().subscribe(data=>this.employees=data.flatMap(x=>{
+       x.listPrice.forEach(y=>y.regionName=x.regionName);
+       return x.listPrice;
+      }));
     // console.log('emp is :',this.employees);
 
   }
