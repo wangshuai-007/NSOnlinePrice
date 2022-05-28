@@ -11,7 +11,8 @@
   <dxi-column dataField="regionName" [groupIndex]="0" caption="地区"></dxi-column>
   <dxi-column dataField="name" caption="套餐名称" ></dxi-column>
   <dxi-column dataField="range" caption="时长" ></dxi-column>
-  <dxi-column dataField="price" caption="价格" [width]="230"></dxi-column>
+  <dxi-column caption="¥价格" [calculateCellValue]="getPriceDesc"   [width]="230"></dxi-column>
+  <dxi-column dataField="formatted_value" caption="价格" [width]="230"></dxi-column>
   <dxo-search-panel  [visible]="true"></dxo-search-panel>
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>

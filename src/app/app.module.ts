@@ -8,7 +8,7 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { PriceComponent } from './pages/price/price.component';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule,DxCheckBoxModule } from 'devextreme-angular';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     UnauthenticatedContentModule,
     AppRoutingModule,
     DxDataGridModule,
+    DxCheckBoxModule,
     HttpClientModule
   ],
   providers: [
