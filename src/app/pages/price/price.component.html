@@ -1,6 +1,8 @@
 <dx-data-grid
+  #dataGridVar
   id="gridContainer"
-  [dataSource]="employees"
+  [dataSource]="pricelist"
+  [columns]="columns"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
   [columnAutoWidth]="true"
@@ -8,11 +10,30 @@
 >
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
-  <dxi-column dataField="regionName" [groupIndex]="0" caption="地区"></dxi-column>
+  <!-- <dxi-column dataField="regionName" [groupIndex]="0" caption="地区"></dxi-column>
+  <dxi-column caption="个人会员">
+  <dxi-column caption="普通会员">
+    <dxi-column caption="1个月"></dxi-column>
+    <dxi-column caption="3个月"></dxi-column>
+    <dxi-column caption="一年"></dxi-column>
+  </dxi-column>
+  <dxi-column caption="高级会员">
+    <dxi-column caption="一年"></dxi-column>
+  </dxi-column>
+  </dxi-column>
+  <dxi-column caption="家庭会员">
+  <dxi-column caption="普通会员">
+    <dxi-column caption="一年"></dxi-column>
+  </dxi-column>
+  <dxi-column caption="高级会员">
+    <dxi-column caption="一年"></dxi-column>
+  </dxi-column>
+  </dxi-column>
+
   <dxi-column dataField="name" caption="套餐名称" ></dxi-column>
   <dxi-column dataField="range" caption="时长" ></dxi-column>
   <dxi-column caption="¥价格" [calculateCellValue]="getPriceDesc"   [width]="230"></dxi-column>
-  <dxi-column dataField="formatted_value" caption="价格" [width]="230"></dxi-column>
+  <dxi-column dataField="formatted_value" caption="价格" [width]="230"></dxi-column> -->
   <dxo-search-panel  [visible]="true"></dxo-search-panel>
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
