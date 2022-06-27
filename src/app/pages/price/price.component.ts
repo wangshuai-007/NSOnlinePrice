@@ -33,6 +33,7 @@ const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
 export class PriceComponent {
   employees: priceInfo[];
   pricelist: any[] = [];
+  focusedRowKey: string="";
   columns: Array<any> = [];
   @ViewChild('dataGridVar', { static: false })
   dataGrid!: DxDataGridComponent;
@@ -134,7 +135,9 @@ export class PriceComponent {
       from(arr).groupBy(g => g.groupName).each(f => {
       var listmidcol=  f.toArray().map(element => {
           var col=columnInfo.filter(c=>c.groupName==element.groupName&&c.membershipName==element.membershipName);
-          var result=<Column>{caption:element.membershipName,columns:col.map(m=><Column>{caption:m.caption,dataField:m.dataField,calculateCellValue(rowData) {
+          var result=<Column>{caption:element.membershipName,columns:col.map(m=><Column>{caption:m.caption,dataField:m.dataField
+            ,cellTemplate:'diffCellTemplate'
+            ,calculateCellValue(rowData) {
             var price=rowData[m.dataField];
             if(!price)return"-";
             return new Intl.NumberFormat('zh-cn', {
@@ -160,18 +163,20 @@ export class PriceComponent {
 
     });
     // console.log('emp is :',this.employees);
+
+    //this.dataGrid.rowAlternationEnabled=true;
+  }
+  ngOnInit(): void {
+    // this.dataGrid.rowAlternationEnabled=true;
   }
 
   ngAfterContentInit(): void {
-
-
-
-
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
 
   }
-  getPriceDesc(price: priceInfo) {
+  getPriceDesc(price: priceInfo): string {
+    if(price.cnyPrice=='0')return '0';
     if(this==null){
       return new Intl.NumberFormat('zh-cn', {
         style: 'currency',

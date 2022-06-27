@@ -7,7 +7,11 @@
   [allowColumnResizing]="true"
   [columnAutoWidth]="true"
   [showBorders]="true"
->
+  [rowAlternationEnabled]="true"
+  [focusedRowEnabled]="true"
+  [(focusedRowKey)]="focusedRowKey"
+  keyExpr="regionName"
+  >
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
   <!-- <dxi-column dataField="regionName" [groupIndex]="0" caption="地区"></dxi-column>
@@ -34,8 +38,16 @@
   <dxi-column dataField="range" caption="时长" ></dxi-column>
   <dxi-column caption="¥价格" [calculateCellValue]="getPriceDesc"   [width]="230"></dxi-column>
   <dxi-column dataField="formatted_value" caption="价格" [width]="230"></dxi-column> -->
+  <div
+    *dxTemplate="let d of 'diffCellTemplate'"
+  >
+    <div class="current-value">{{
+      d.value
+    }}</div>
+    <div *ngIf="focusedRowKey==d.key">{{d.data[d.column.dataField.slice(0,d.column.dataField.length-4)]}}</div>
+  </div>
   <dxo-search-panel  [visible]="true"></dxo-search-panel>
-  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-group-panel *ngIf="false" [visible]="true"></dxo-group-panel>
   <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
 </dx-data-grid>
 
