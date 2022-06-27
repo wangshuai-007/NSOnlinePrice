@@ -117,6 +117,7 @@ export class PriceComponent {
 
           s.toArray().filter(w => w.groupId == f.groupId).forEach(x => {
             console.log('x is ',x);
+            returnTemp["sourceCurrency"]=x.currency
             var columnName = `${f.groupName}-${f.membershipName}-${x.range}`;
             returnTemp[columnName] = x.price;
             columnName += "-cny"
@@ -175,6 +176,18 @@ export class PriceComponent {
     //Add 'implements AfterViewInit' to the class.
 
   }
+  getsourceprice(gridData:any) {
+    console.log('gridData is ',gridData);
+    var price=gridData.data[gridData.column.dataField.slice(0,gridData.column.dataField.length-4)];
+    if(!price)return "-";
+
+    return new Intl.NumberFormat('zh-cn', {
+      style: 'currency',
+      currency: gridData.data.sourceCurrency
+    }).format(parseFloat(price))
+    return gridData.sourceCurrency;
+  }
+
   getPriceDesc(price: priceInfo): string {
     if(price.cnyPrice=='0')return '0';
     if(this==null){

@@ -44,7 +44,7 @@
     <div class="current-value">{{
       d.value
     }}</div>
-    <div *ngIf="focusedRowKey==d.key">{{d.data[d.column.dataField.slice(0,d.column.dataField.length-4)]}}</div>
+    <div *ngIf="focusedRowKey==d.key">{{getsourceprice(d)}}</div>
   </div>
   <dxo-search-panel  [visible]="true"></dxo-search-panel>
   <dxo-group-panel *ngIf="false" [visible]="true"></dxo-group-panel>
