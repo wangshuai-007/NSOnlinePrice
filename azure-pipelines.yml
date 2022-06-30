@@ -27,6 +27,9 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
+- task: OctoInstaller@5
+  inputs:
+    version: 
 - task: OctopusPush@5
   inputs:
     OctoConnectedServiceName: '007.octopus'
