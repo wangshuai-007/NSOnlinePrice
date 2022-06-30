@@ -29,7 +29,7 @@ steps:
     replaceExistingArchive: true
 - task: OctoInstaller@5
   inputs:
-    version: 
+    version: '*'
 - task: OctopusPush@5
   inputs:
     OctoConnectedServiceName: '007.octopus'
