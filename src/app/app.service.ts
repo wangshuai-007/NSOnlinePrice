@@ -680,7 +680,6 @@ export class Service {
     }
     var apiUrl=null ;
     if(apiUrl==null){
-      apiUrl="https://nsonlineprice.wangshuai.app/api";
       // apiUrl="http://192.168.1.106:8787/";
     }
 
