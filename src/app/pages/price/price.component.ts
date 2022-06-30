@@ -49,10 +49,10 @@ export class PriceComponent {
 
   constructor(private service: Service) {
     this.employees = new Array<priceInfo>();
-    console.log('start get price');
+    //console.log('start get price');
 
     this.service.getNsOnlinePrice().subscribe(data => {
-      console.log('start bind data');
+      //console.log('start bind data');
 
       this.employees = data.flatMap(x => {
         x.listPrice.forEach(y => y.regionName = x.regionName);

@@ -1,7 +1,7 @@
 import { cnyCurrencyInfo } from './cnyCurrencyInfo';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { observable, Observable, of, Subject } from 'rxjs';
+import { observable, Observable, of, Subject, delay } from 'rxjs';
 
 
 export interface Region {
@@ -496,17 +496,6 @@ var cnyPriceRate:cnyCurrencyInfo;
 @Injectable()
 export class Service {
   constructor(private httpClient: HttpClient) {
-    var  options = {
-      method: 'get',
-      url: 'https://api.apilayer.com/fixer/latest?base=CNY',
-      headers: {
-        'apikey': 'C55BH16h4OgiZT6kOldVlkoYoptf4LM1'
-      }
-    };
-    // httpClient.get<cnyCurrencyInfo>(options.url,{headers:options.headers}).subscribe(c=>{
-    //   console.log('get cny price:',c);
-    //   cnyPriceRate=c;
-    // });
     cnyPriceRate={
       "success": true,
       "timestamp": 1653726543,
@@ -696,23 +685,8 @@ export class Service {
     }
 
    httpOptions.headers= httpOptions.headers.set('Access-Control-Allow-Origin', '*');
-    // httpOptions.headers=httpOptions.headers.set('x-foo', 'x-foo');
-    // if(httpOptions.headers.has('x-foo')){
-    //   console.log("has x-foo");
-    // }
-    // else{
-    //   console.log("not has x-foo");
 
-    // }
-    // console.log('current httpOptions:', httpOptions);
-    // dataTemp.forEach(element => {
-    //   element.listPrice.forEach(f => {
-    //     var info= cnyPriceRate.rates[f.currency];
-    //     f.cnyPrice=(info * parseInt(f.price)).toString();
-    //   })
-    // })
-
-    //return of(dataTemp);
+    return of(dataTemp).pipe(delay(3000));
 
 
 
