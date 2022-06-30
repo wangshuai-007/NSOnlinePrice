@@ -49,26 +49,13 @@ export class PriceComponent {
 
   constructor(private service: Service) {
     this.employees = new Array<priceInfo>();
+    console.log('start get price');
+
     this.service.getNsOnlinePrice().subscribe(data => {
+      console.log('start bind data');
+
       this.employees = data.flatMap(x => {
         x.listPrice.forEach(y => y.regionName = x.regionName);
-
-        // x.listPrice.reduce((preview, current) => {
-        //   const key = current.groupId + '-' + current.range;
-
-        //   const item = preview.get(key) || Object.assign({}, current, {
-        //     used: 0,
-        //     instances: 0
-        //   });
-
-        //   item.used += current.used;
-        //   item.instances += current.instances;
-
-        //   return preview.set(key, item);
-
-        // },new Map() )
-
-        // from(x.listPrice).groupBy(c=>c.regionName).select(s=>new {})
         return x.listPrice;
       });
       this.dataGrid?.columns?.slice(0);
@@ -104,7 +91,7 @@ export class PriceComponent {
           "isFamily": true,
         }
       ]
-      console.log(arr);
+      // console.log(arr);
 
       var columnInfo = [{ "dataField": "regionName", "caption": "地区", "groupName": "", "membershipName": "" }];
       //columnInfo.splice(0, 1);
@@ -112,17 +99,17 @@ export class PriceComponent {
         var returnTemp: any = {};
         returnTemp["regionName"] = s.key;
         arr.forEach(f => {
-          console.log('s is ',s);
+          // console.log('s is ',s);
 
 
           s.toArray().filter(w => w.groupId == f.groupId).forEach(x => {
-            console.log('x is ',x);
+            // console.log('x is ',x);
             returnTemp["sourceCurrency"]=x.currency
             var columnName = `${f.groupName}-${f.membershipName}-${x.range}`;
             returnTemp[columnName] = x.price;
             columnName += "-cny"
             returnTemp[columnName] = x.cnyPrice;
-            console.log('returnTemp is ',returnTemp);
+            // console.log('returnTemp is ',returnTemp);
 
             if(!columnInfo.find(c=>c.dataField==columnName))
             columnInfo.push({ "dataField": columnName, "caption": x.range, "groupName": f.groupName, "membershipName": f.membershipName });
@@ -161,7 +148,7 @@ export class PriceComponent {
       //   this.columns.push(<Column>{ isBand: false, dataField: f.fieldname})
       // });
       this.dataGrid?.instance?.refresh();
-
+      this.dataGrid.instance.option('dataSource',this.pricelist);
     });
     // console.log('emp is :',this.employees);
 
@@ -177,7 +164,7 @@ export class PriceComponent {
 
   }
   getsourceprice(gridData:any) {
-    console.log('gridData is ',gridData);
+    // console.log('gridData is ',gridData);
     var price=gridData.data[gridData.column.dataField.slice(0,gridData.column.dataField.length-4)];
     if(!price)return "-";
 
