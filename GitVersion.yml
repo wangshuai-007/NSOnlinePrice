@@ -1,0 +1,36 @@
+next-version: 1.0
+mode: ContinuousDelivery
+increment: Inherit
+tag-prefix: '[vV]'
+#source-branches: ['master', 'develop', 'hotfix']
+ignore:
+  sha: []
+  commits-before: 2018-01-01T00:00:00
+branches:
+  master:
+    regex: master$
+    mode: ContinuousDelivery
+    tag: ''
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: true
+  release:
+    regex: r(elease$|(eleases)?[-/])
+    mode: ContinuousDelivery
+    tag: beta
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: true
+  feature:
+    regex: f(eatures)?[-/]
+    mode: ContinuousDeployment
+    tag: alpha
+    increment: Minor
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
