@@ -34,7 +34,7 @@ steps:
     rootFolderOrFile: '$(Build.BinariesDirectory)'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).$(GitVersion.SemVer).zip'
     replaceExistingArchive: true
 - task: OctoInstaller@5
   inputs:
