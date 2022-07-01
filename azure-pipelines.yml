@@ -30,9 +30,10 @@ steps:
 - task: OctoInstaller@5
   inputs:
     version: '*'
+
 - task: OctopusPush@5
   inputs:
     OctoConnectedServiceName: '007.octopus'
     Space: 'Spaces-1'
-    Package: '$(Build.ArtifactStagingDirectory)/packages/*.zip'
+    Package: '$(Build.ArtifactStagingDirectory)/*.zip'
     Replace: 'false'
