@@ -10,11 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: gittools.gitversion.gitversion-task.GitVersion@5
-  displayName: GitVersion
+- task: gitversion/setup@0
   inputs:
-    configFilePath: GitVersion.yml
-    updateAssemblyInfo: true
+    versionSpec: '5.x'
+- task: gitversion/execute@0
 - script: echo %Action%%BuildVersion%
   displayName: 'Set build version'
   env:
