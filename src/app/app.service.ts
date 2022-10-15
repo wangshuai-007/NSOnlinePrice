@@ -680,14 +680,13 @@ export class Service {
     }
     var apiUrl=null ;
     if(apiUrl==null){
+      apiUrl="https://nsonlineprice.wangshuai.app/api";
       // apiUrl="http://192.168.1.106:8787/";
     }
 
    httpOptions.headers= httpOptions.headers.set('Access-Control-Allow-Origin', '*');
 
-    return of(dataTemp).pipe(delay(3000));
-
-
+    // return of(dataTemp).pipe(delay(3000));
 
     return this.httpClient.get<RegionPrice[]>(apiUrl, httpOptions).pipe(
       // tap(_ => this.log(`add hero w/ id =${_.id}`),
