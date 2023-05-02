@@ -32,6 +32,7 @@ const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
 // @Injectable()
 export class PriceComponent {
   employees: priceInfo[];
+  updateTime: string="2023/5/2 19:17:00";
   pricelist: any[] = [];
   focusedRowKey: string="";
   columns: Array<any> = [];
@@ -150,6 +151,10 @@ export class PriceComponent {
       this.dataGrid?.instance?.refresh();
       this.dataGrid.instance.option('dataSource',this.pricelist);
     });
+
+    this.service.getInfo().subscribe(data=>{
+      this.updateTime=data;
+    })
     // console.log('emp is :',this.employees);
 
     //this.dataGrid.rowAlternationEnabled=true;
