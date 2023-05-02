@@ -32,9 +32,9 @@ const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
 // @Injectable()
 export class PriceComponent {
   employees: priceInfo[];
-  updateTime: string="2023/5/2 19:17:00";
+  updateTime: string = "2023/5/2 19:17:00";
   pricelist: any[] = [];
-  focusedRowKey: string="";
+  focusedRowKey: string = "";
   columns: Array<any> = [];
   @ViewChild('dataGridVar', { static: false })
   dataGrid!: DxDataGridComponent;
@@ -105,15 +105,15 @@ export class PriceComponent {
 
           s.toArray().filter(w => w.groupId == f.groupId).forEach(x => {
             // console.log('x is ',x);
-            returnTemp["sourceCurrency"]=x.currency
+            returnTemp["sourceCurrency"] = x.currency
             var columnName = `${f.groupName}-${f.membershipName}-${x.range}`;
             returnTemp[columnName] = x.price;
             columnName += "-cny"
             returnTemp[columnName] = x.cnyPrice;
             // console.log('returnTemp is ',returnTemp);
 
-            if(!columnInfo.find(c=>c.dataField==columnName))
-            columnInfo.push({ "dataField": columnName, "caption": x.range, "groupName": f.groupName, "membershipName": f.membershipName });
+            if (!columnInfo.find(c => c.dataField == columnName))
+              columnInfo.push({ "dataField": columnName, "caption": x.range, "groupName": f.groupName, "membershipName": f.membershipName });
           })
         })
 
@@ -122,22 +122,26 @@ export class PriceComponent {
       //add region
       this.columns.push(columnInfo[0]);
       from(arr).groupBy(g => g.groupName).each(f => {
-      var listmidcol=  f.toArray().map(element => {
-          var col=columnInfo.filter(c=>c.groupName==element.groupName&&c.membershipName==element.membershipName);
-          var result=<Column>{caption:element.membershipName,columns:col.map(m=><Column>{caption:m.caption,dataField:m.dataField
-            ,cellTemplate:'diffCellTemplate'
-            ,calculateCellValue(rowData) {
-            var price=rowData[m.dataField];
-            if(!price)return"-";
-            return new Intl.NumberFormat('zh-cn', {
-              style: 'currency',
-              currency: 'CNY'
-            }).format(parseFloat(rowData[m.dataField]));
-          }})};
+        var listmidcol = f.toArray().map(element => {
+          var col = columnInfo.filter(c => c.groupName == element.groupName && c.membershipName == element.membershipName);
+          var result = <Column>{
+            caption: element.membershipName, columns: col.map(m => <Column>{
+              caption: m.caption, dataField: m.dataField
+              , cellTemplate: 'diffCellTemplate'
+              , calculateCellValue(rowData) {
+                var price = rowData[m.dataField];
+                if (!price) return "-";
+                return new Intl.NumberFormat('zh-cn', {
+                  style: 'currency',
+                  currency: 'CNY'
+                }).format(parseFloat(rowData[m.dataField]));
+              }
+            })
+          };
           return result;
         });
 
-        this.columns.push(<Column>{ isBand: true, caption: f.key,columns:listmidcol });
+        this.columns.push(<Column>{ isBand: true, caption: f.key, columns: listmidcol });
       }).toArray();
       // from(arr).each(f => {
       //   // var bandIndex = this.dataGrid.instance.getVisibleColumnIndex(f.groupName);
@@ -149,12 +153,16 @@ export class PriceComponent {
       //   this.columns.push(<Column>{ isBand: false, dataField: f.fieldname})
       // });
       this.dataGrid?.instance?.refresh();
-      this.dataGrid.instance.option('dataSource',this.pricelist);
+      this.dataGrid.instance.option('dataSource', this.pricelist);
     });
 
-    this.service.getInfo().subscribe(data=>{
-      this.updateTime=data;
-    })
+    this.service.getInfo().subscribe(data => {
+      var updateTime = JSON.parse(data);
+      if (updateTime != null) {
+        this.updateTime = new Date(updateTime.date).toLocaleString();
+      }
+      else { this.updateTime = data; }
+    });
     // console.log('emp is :',this.employees);
 
     //this.dataGrid.rowAlternationEnabled=true;
@@ -168,10 +176,10 @@ export class PriceComponent {
     //Add 'implements AfterViewInit' to the class.
 
   }
-  getsourceprice(gridData:any) {
+  getsourceprice(gridData: any) {
     // console.log('gridData is ',gridData);
-    var price=gridData.data[gridData.column.dataField.slice(0,gridData.column.dataField.length-4)];
-    if(!price)return "-";
+    var price = gridData.data[gridData.column.dataField.slice(0, gridData.column.dataField.length - 4)];
+    if (!price) return "-";
 
     return new Intl.NumberFormat('zh-cn', {
       style: 'currency',
@@ -181,8 +189,8 @@ export class PriceComponent {
   }
 
   getPriceDesc(price: priceInfo): string {
-    if(price.cnyPrice=='0')return '0';
-    if(this==null){
+    if (price.cnyPrice == '0') return '0';
+    if (this == null) {
       return new Intl.NumberFormat('zh-cn', {
         style: 'currency',
         currency: 'CNY'
