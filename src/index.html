@@ -32,29 +32,31 @@
       .then(structuredDataText => {
         document.info=structuredDataText;
         document.querySelector('meta[property="modified_time"]').setAttribute("content", structuredDataText.date);
-      });
-  </script>
 
-  <script type="application/ld+json">
-    {
+        const script = document.createElement('script');
+        script.setAttribute('type', 'application/ld+json');
+        script.textContent = `{
       "@context":"https://schema.org",
       "@type":"Product",
       "image":"https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_600/ncom/en_US/switch/online-service/Expansion%20Pack/1280x1300_pricelist_nso_EN",
       "name":"任天堂在线会员",
       "alternateName":"任天堂会员价目表",
       "description":"每日获取各区官网原价及汇率计算人民币售价,横向对比后可以找到最便宜的价格",
-      "price":"{{document.info.min}}",
+      "price":"${document.info.min}",
       "priceCurrency":"CNY",
       "offers":{
           "@type":"Offer",
-          "highPrice":"{{document.info.max}}",
-          "lowPrice":"{{document.info.min}}",
-          "price":"{{document.info.min}}",
+          "highPrice":"${document.info.max}",
+          "lowPrice":"${document.info.min}",
+          "price":"${document.info.min}",
           "priceCurrency":"CNY"
       },
-      "validFrom":"{{document.info.date}}"
-  }
+      "validFrom":"${document.info.date}"  }
+        `;
+        document.head.appendChild(script);
+      });
   </script>
+
 
 </head>
 
