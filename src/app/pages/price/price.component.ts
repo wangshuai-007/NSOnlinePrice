@@ -32,7 +32,7 @@ const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
 // @Injectable()
 export class PriceComponent {
   employees: priceInfo[];
-  updateTime: string = "2023/5/2 19:17:00";
+  updateTime: Date = new Date;
   pricelist: any[] = [];
   focusedRowKey: string = "";
   columns: Array<any> = [];
@@ -157,11 +157,7 @@ export class PriceComponent {
     });
 
     this.service.getInfo().subscribe(data => {
-      var updateTime = JSON.parse(data);
-      if (updateTime != null) {
-        this.updateTime = new Date(updateTime.date).toLocaleString();
-      }
-      else { this.updateTime = data; }
+      this.updateTime = data.date;
     });
     // console.log('emp is :',this.employees);
 

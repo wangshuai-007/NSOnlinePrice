@@ -14,6 +14,14 @@ export interface RegionPrice {
   //所有价格
   listPrice: priceInfo[];
 }
+export interface Info {
+  //更新时间
+  date: Date;
+  //最高价(一般为高级会员年付)
+  max: number;
+  //最低价(一般为家庭会员月付)
+  min: number;
+}
 export interface priceInfo {
   uid:number;
   //价格名称:  个人普通会员
@@ -695,7 +703,7 @@ export class Service {
     );
 
   }
-  getInfo(): Observable<string>{
+  getInfo(): Observable<Info>{
     var httpOptions = {
       headers: new HttpHeaders()
     }
@@ -709,7 +717,7 @@ export class Service {
 
     // return of(dataTemp).pipe(delay(3000));
 
-    return this.httpClient.get<string>(apiUrl, httpOptions).pipe(
+    return this.httpClient.get<Info>(apiUrl, httpOptions).pipe(
       // tap(_ => this.log(`add hero w/ id =${_.id}`),
       //   catchError(this.handleError<RegionPrice>('addHero'))
       // )
