@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>任天堂会员价目表 任天堂会员最新价格 任天堂会员实时价格</title>
+  <title>任天堂会员价目表 | 任天堂会员最新价格 | 任天堂会员实时价格</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -11,7 +11,7 @@
   <meta name="author" content="王帅">
   <meta name="keywords" content="nintendo switch online price,任天堂会员最新价格">
 
-  <meta name="description" content="任天堂会员价目表 任天堂会员最新价格 任天堂会员实时价格 每日获取各区官网原价及汇率计算人民币售价,横向对比后可以找到最便宜的价格">
+  <meta name="description" content="每日获取各区官网原价及汇率计算人民币售价,横向对比后可以找到最便宜的价格">
   <meta property="og:type" content="article">
   <meta property="og:title" content="任天堂各区最新实时会员价格">
   <meta property="og:url" content="https://nsonlineprice.wangshuai.app/">
@@ -30,8 +30,10 @@
     fetch('https://nsonlineprice.wangshuai.app/api/info')
       .then(response => response.json())
       .then(structuredDataText => {
-        document.info=structuredDataText;
+        document.info = structuredDataText;
         document.querySelector('meta[property="modified_time"]').setAttribute("content", structuredDataText.date);
+
+        document.querySelector('meta[name="description"]').setAttribute("content", document.querySelector('meta[name="description"]').content + ",今日最低价:￥" + structuredDataText.min);
 
         const script = document.createElement('script');
         script.setAttribute('type', 'application/ld+json');
