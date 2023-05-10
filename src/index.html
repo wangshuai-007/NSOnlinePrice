@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>任天堂会员价目表 | 任天堂会员最新价格 | 任天堂会员实时价格</title>
+  <title>任天堂会员价目表 ｜ 任天堂会员最新价格 ｜ 任天堂会员实时价格</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -21,6 +21,7 @@
   <meta property="article:published_time" content="2022-06-30T18:21:27.000Z">
   <meta property="article:modified_time" content="2022-10-15T00:00:00.000Z">
   <meta property="modified_time" content="2023-05-03T00:00:00.000Z">
+  <meta property="timestamp" content="2023-05-03T00:00:00.000Z">
   <meta property="article:author" content="Wang Shuai">
   <meta property="article:tag" content="nintendo">
   <meta property="article:tag" content="nintendo switch online">
@@ -32,6 +33,7 @@
       .then(structuredDataText => {
         document.info = structuredDataText;
         document.querySelector('meta[property="modified_time"]').setAttribute("content", structuredDataText.date);
+        document.querySelector('meta[property="timestamp"]').setAttribute("content", structuredDataText.date);
 
         document.querySelector('meta[name="description"]').setAttribute("content", document.querySelector('meta[name="description"]').content + ",今日最低价:￥" + structuredDataText.min);
 
